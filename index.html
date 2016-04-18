@@ -2,6 +2,7 @@
 <html ng-app="findFilm">
   <head>
     <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    <script type="text/javascript" src="jquery.js"></script>
     <script type="text/javascript" src="angular.min.js"></script>
     <script type="text/javascript" src="app.js"></script>
   </head>
@@ -12,7 +13,13 @@
       FIND DIRECTOR
     </header>
 
+    <!-- Search for film details -->
     <film-form></film-form>
-    
+
+    <!-- Check if the film is on Netflix 
+    <netflix-check></netflix-check>-->
+
+    <button type="button" id="netflixCheck" ng-model="film.Title" ng-controller="NetflixController as netflix" ng-click="netflix.netflixCheck()">Check on netflix</button>
+
   </body>
 </html>

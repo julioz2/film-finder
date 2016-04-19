@@ -19,7 +19,27 @@
     <!-- Check if the film is on Netflix 
     <netflix-check></netflix-check>-->
 
-    <button type="button" id="netflixCheck" ng-model="film.Title" ng-controller="NetflixController as netflix" ng-click="netflix.netflixCheck()">Check on netflix</button>
+    <!-- Check if the film is on Netflix  -->
+    <button type="button" id="netflixCheck" ng-controller="NetflixController as netflix" ng-click="netflix.netflixCheck()">Check on netflix</button>
+
+    <!-- Check if the film is on Cinema (bologna only)  -->
+    <button type="button" id="cinemaCheck" ng-controller="CinemaController as cinema" ng-click="cinema.cinemaCheck()">Check on cinema (Bologna - Italy only)</button>
 
   </body>
 </html>
+
+
+
+http://www.cinetecadibologna.it/api/GetSchedule?startdate=&enddate=&keyword=
+
+http://www.cinetecadibologna.it/api/GetSchedule?startdate=YYYYMM-DD&enddate=YYYY-MM-DD&event=[ID]&keyword=[String]
+
+
+
+
+
+
+
+
+
+

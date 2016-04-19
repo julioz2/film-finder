@@ -1,4 +1,1 @@
-codeschool-shaping-up-with-angular
-==================================
-
-Source code for the shaping up with angular course run by Codeschool at https://www.codeschool.com/courses/shaping-up-with-angular-js/
+Find a film and check if the film exist on Netflix or on cinema around you

@@ -11,12 +11,6 @@
  	app.controller('SubmitFilmController', ['$http', 'filmGlobal', function($http, filmGlobal){
 
 		var film = {};
-
-		/*filmGlobal.store(function(data) { 
-			alert(2);
-			console.log(data);
-		});*/
-
 		var titleG = filmGlobal.title;
 
 		this.findFilm = function(film) {
@@ -30,22 +24,20 @@
 			$http.get('http://www.omdbapi.com/?t='+film.title+'&y=&plot=full&r=json').success(function(data){
 				filmObj.details = data;
 				filmObj.details.show = true;
-
 				filmGlobal.title = film.title;
-
-				console.warn(filmGlobal.title)
+				filmGlobal.show = filmObj.details.show;
 			});
-			//https://en.wikipedia.org/w/api.php?action=query&prop=revisions&titles=David+Lynch&rvprop=timestamp|user|comment|content
 		} 
 		
 	}]);
 
 	app.factory('filmGlobal', function ($rootScope) {    	
 
-		var filmG = {};
+		var filmG = {
+			title : '',
+			show : false
+		};
 		  
-		filmG.title = 'Rambo';
-
 		return filmG;
 	});
 
@@ -54,10 +46,13 @@
 		var netflix = {};
 		//var titleG = filmGlobal.title;
 
+		this.show = true;
+
 		this.netflixCheck = function(){
 
-			var titleG = filmGlobal.title;
+			this.show = true;
 
+			var titleG = filmGlobal.title;
 			//console.log(Scopes.get('SubmitFilmController', filmObj));
 
 			//var filmTitle = angular.element(document.getElementById("filmTitle").innerHTML);
@@ -67,8 +62,7 @@
 			$http.get('http://netflixroulette.net/api/api.php?title='+titleG)
 				.success(function(data){
 					netflixObj.details = data;
-
-					console.log('NETFLIX = ' + netflixObj.details);
+					netflixObj.details.show = true;
 				});
 		};
 	}]);
@@ -91,8 +85,6 @@
 			$http.get('http://www.cinetecadibologna.it/api/GetSchedule')
 				.success(function(data){
 					cinemaObj.details = data;
-
-					console.warn('CINEMA' + cinemaObj.details);
 				});
 		};
 	}]);

@@ -1,38 +1,49 @@
 <!DOCTYPE html>
 <html ng-app="findFilm">
-  <head>
-    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
-    <script type="text/javascript" src="jquery.js"></script>
-    <script type="text/javascript" src="angular.min.js"></script>
-    <script type="text/javascript" src="app.js"></script>
-  </head>
+<head>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<script type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript" src="angular.min.js"></script>
+	<script type="text/javascript" src="app.js"></script>
+</head>
 
-  <body>
-    <!--  Store Header  -->
-    <header>
-      FIND DIRECTOR
-    </header>
+<body>
+	<!-- Header  -->
+	<header></header>
 
-    <!-- Search for film details -->
-    <film-form></film-form>
+	<!-- Search for film details -->
+	<film-form></film-form>
 
-    <!-- Check if the film is on Netflix 
-    <netflix-check></netflix-check>-->
+		<!-- Check if the film is on Netflix 
+		<netflix-check></netflix-check>-->
 
-    <!-- Check if the film is on Netflix  -->
-    <button type="button" id="netflixCheck" ng-controller="NetflixController as netflix" ng-click="netflix.netflixCheck()">Check on netflix</button>
+		<!-- Check if the film is on Netflix  ng-show="netflixCtrl.show" -->
+		<div ng-controller="NetflixController as netflixCtrl" ng-show="netflixCtrl.show">
 
-    <!-- Check if the film is on Cinema (bologna only)  -->
-    <button type="button" id="cinemaCheck" ng-controller="CinemaController as cinema" ng-click="cinema.cinemaCheck()">Check on cinema (Bologna - Italy only)</button>
+		<h1> A {{netflixCtrl.show}}</h1>
+			
+			<button type="button" id="netflixCheck" ng-click="netflixCtrl.netflixCheck()">Check on netflix</button>
 
-  </body>
+			<div>
+				<!--  Products Container  -->
+				<div class="list-group">
+					<!--  Product Container  -->
+					<div class="list-group-item" ng-show="netflix.show" ng-repeat="netflix in netflixCtrl">
+
+						<h2 id="filmTitle">Film on netflix</h2>
+						<h3>Rating : <span class="rating">{{netflix.rating}}</span></h3>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Check if the film is on Cinema (bologna only) TODO  -->
+		<button type="button" id="cinemaCheck" ng-show="cinema.show" ng-controller="CinemaController as cinema" ng-click="cinema.cinemaCheck()">Check on cinema (Bologna - Italy only)</button>
+
+	</body>
 </html>
-
-
-
-http://www.cinetecadibologna.it/api/GetSchedule?startdate=&enddate=&keyword=
-
-http://www.cinetecadibologna.it/api/GetSchedule?startdate=YYYYMM-DD&enddate=YYYY-MM-DD&event=[ID]&keyword=[String]
 
 
 

@@ -1,6 +1,8 @@
 (function() {
 	var app = angular.module('findFilm', []);
 
+	// AIzaSyDDRFC6h1sm7wS3tOxUQNXOA82xnU5auh4
+
 	app.directive('filmForm', function(){
 		return {
 			restrict : 'E',
@@ -8,7 +10,7 @@
 		};
 	});
 
- 	app.controller('SubmitFilmController', ['$http', 'filmGlobal', function($http, filmGlobal){
+	app.controller('SubmitFilmController', ['$http', 'filmGlobal', function($http, filmGlobal){
 
 		var film = {};
 		var titleG = filmGlobal.title;
@@ -37,7 +39,7 @@
 			title : '',
 			show : false
 		};
-		  
+
 		return filmG;
 	});
 
@@ -60,10 +62,10 @@
 			netflixObj.details = [];
 
 			$http.get('http://netflixroulette.net/api/api.php?title='+titleG)
-				.success(function(data){
-					netflixObj.details = data;
-					netflixObj.details.show = true;
-				});
+			.success(function(data){
+				netflixObj.details = data;
+				netflixObj.details.show = true;
+			});
 		};
 	}]);
 
@@ -83,10 +85,53 @@
 			cinemaObj.details = [];
 
 			$http.get('http://www.cinetecadibologna.it/api/GetSchedule')
-				.success(function(data){
-					cinemaObj.details = data;
-				});
+			.success(function(data){
+				cinemaObj.details = data;
+			});
 		};
+	}]);
+
+	app.directive('youtubeTrailer', function(){
+		return {
+			restrict : 'E',
+			templateUrl : 'trailer.html'
+		};
+	});
+
+	app.controller('YoutubeTrailer', ['filmGlobal', function(filmGlobal){
+
+
+		this.videoStart = function(){
+
+			var query = filmGlobal.title + ' trailer';
+
+			var video = gapi.client.youtube.search.list({
+				part: "snippet",
+				type: "video",
+				q: query,
+				maxResults: 1
+			});
+
+			video.execute(function(response) {
+
+				console.log(response);
+
+				this.id = response.items[0].id.videoId;
+
+				this.iframe = '<iframe class="video w100" width="100%" height="360" src="//www.youtube.com/embed/'+this.id+'" frameborder="0" allowfullscreen></iframe>';
+
+				$('.trailer').append(this.iframe);
+
+/*
+				$.each(results.items, function(index, item) {
+					$.get("tpl/item.html", function(data) {
+						$("#results").append(tplawesome(data, [{"title":item.snippet.title, "videoid":item.id.videoId}]));
+					});
+				});
+
+				console.warn(response);*/
+			});
+		}
 	}]);
 
 })();

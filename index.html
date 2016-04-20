@@ -6,6 +6,8 @@
 	<script type="text/javascript" src="jquery.js"></script>
 	<script type="text/javascript" src="angular.min.js"></script>
 	<script type="text/javascript" src="app.js"></script>
+	<script type="text/javascript" src="youtube.js"></script>
+	<script src="https://apis.google.com/js/client.js?onload=init"></script>
 </head>
 
 <body>
@@ -38,6 +40,9 @@
 				</div>
 			</div>
 		</div>
+
+		BNBNBNB
+		<youtube-trailer></youtube-trailer>
 
 		<!-- Check if the film is on Cinema (bologna only) TODO  -->
 		<button type="button" id="cinemaCheck" ng-show="cinema.show" ng-controller="CinemaController as cinema" ng-click="cinema.cinemaCheck()">Check on cinema (Bologna - Italy only)</button>
